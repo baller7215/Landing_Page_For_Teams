@@ -17,7 +17,8 @@ import {
   ListItem,
   ListIcon,
   OrderedList,
-  UnorderedList
+  UnorderedList,
+  chakra,
 } from "@chakra-ui/react";
 
 import api from "./api";
@@ -69,6 +70,20 @@ export default function App() {
     members,
   }));
 
+  const aboutUsText =
+    "We are creating a volunteer management portal for the admins of ELDR (Elder Law and Disability Rights Center) so they can more efficiently track, update, and maintain volunteer involvement with events. ELDR hosts workshops, cases, and clinics, and managing/assigning those volunteers was previously done through Google Forms (which can get messy).";
+
+  const aboutUsWords = aboutUsText.split(" ").map((word, idx, arr) => (
+    <chakra.span
+      key={`${word}-${idx}`}
+      transition="color 0.2s ease"
+      _hover={{ color: "teal.500"}}
+    >
+      {word}
+      {idx < arr.length - 1 ? " " : ""}
+    </chakra.span>
+  ));
+
   return (
     <Container py={10} maxW="7xl">
       {/* ===== TEAM HEADER ===== */}
@@ -94,13 +109,8 @@ export default function App() {
           <Heading size="lg">About Us</Heading>
         </CardHeader>
         <CardBody>
-          <Text bg="teal" bgClip="text" fontWeight="bold">
-            We are creating a volunteer management portal for the admins of ELDR
-            (Elder Law and Disability Rights Center) so they can more
-            efficiently track, update, and maintain volunteer involvement with
-            events. ELDR hosts workshops, cases, and clinics, and
-            managing/assigning those volunteers was previously done through
-            Google Forms (which can get messy).
+          <Text fontWeight="semibold" color="gray.700">
+            {aboutUsWords}
           </Text>
         </CardBody>
       </Card>

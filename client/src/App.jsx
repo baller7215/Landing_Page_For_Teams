@@ -78,7 +78,7 @@ export default function App() {
           {team.description}
         </Text>
         <Box boxSize='35px'>
-          <Image src='https://isteam.wsimg.com/ip/f5dc30e0-29ae-4a24-a77e-a22d64016ffc/411e85c6-d05d-4074-a243-74b5a49d63e8.jpg/:/rs=w:178,h:200,cg:true,m/cr=w:178,h:200' alt='ELDR Logo' />
+          <Image src='src\eldr.png' alt='ELDR Logo' />
         </Box>
       </VStack>
 

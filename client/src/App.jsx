@@ -307,21 +307,21 @@ export default function App() {
                     _hover={{ transform: 'translateX(8px)' }} 
                     transition="transform 0.2s"
                   >
-                    <ListIcon as={MdCheckCircle} color='green.500' boxSize={5} />
+                    <ListIcon as={MdCheckCircle} color='#9BAEBC' boxSize={5} />
                     The provision of free and low-cost legal services.
                   </ListItem>
                   <ListItem 
                     _hover={{ transform: 'translateX(8px)' }} 
                     transition="transform 0.2s"
                   >
-                    <ListIcon as={MdCheckCircle} color='green.500' boxSize={5} />
+                    <ListIcon as={MdCheckCircle} color='#9BAEBC' boxSize={5} />
                     Ensure low-income seniors and people with disabilities can live with dignity and independence regardless of income.
                   </ListItem>
                   <ListItem 
                     _hover={{ transform: 'translateX(8px)' }} 
                     transition="transform 0.2s"
                   >
-                    <ListIcon as={MdCheckCircle} color='green.500' boxSize={5} />
+                    <ListIcon as={MdCheckCircle} color='#9BAEBC' boxSize={5} />
                     Serve justice for members of our communities who are elderly, living with disabilities, or experiencing homelessness.
                   </ListItem>
                 </List>

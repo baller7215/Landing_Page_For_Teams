@@ -75,7 +75,7 @@ export default function App() {
         <Container py={20} maxW="4xl" centerContent>
           <VStack spacing={4}>
             <Box className="pulse" animation="pulse 2s infinite">
-              <Heading size="xl" bgGradient="linear(to-r, teal.400, blue.500)" bgClip="text">
+              <Heading size="xl">
                 Loading team data...
               </Heading>
             </Box>
@@ -169,7 +169,7 @@ export default function App() {
               boxSize='80px' 
               borderRadius="lg" 
               overflow="hidden" 
-              shadow="md"
+              // shadow="md"
               // _hover={{ transform: 'scale(1.1) rotate(5deg)', shadow: 'xl' }}
               // transition="all 0.3s ease"
             >

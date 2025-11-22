@@ -7,6 +7,7 @@ import {
   Button,
   SimpleGrid,
   Divider,
+  Highlight,
   Card,
   CardHeader,
   CardBody,
@@ -91,15 +92,21 @@ export default function App() {
 
       {/* ===== PROJECT + GOALS SECTION ===== */}
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={10}>
-        <Card>
-          <CardHeader>
-            <Heading size="lg">Project Overview</Heading>
+        <Card variant="filled" size="lg" bgGradient="linear(to-t, #7dbfe8, #093f75)">
+          <CardHeader mb="-4">
+            <Heading lineHeight="short">
+              <Highlight query='Project Overview' styles={{ px: '4', py: '2', rounded: 'full', bg: 'teal.100' }}>
+                Project Overview
+              </Highlight>
+            </Heading>
           </CardHeader>
-          <CardBody>
-            <Text>
+          <CardBody >
+            <Text color="white">
               {/* TODO: Students replace */}
-              Write 2–3 sentences describing your project and what problem it
-              solves.
+              <Highlight query='EDLR Law' styles={{ px: '4', py: '2', rounded: 'full', bg: 'teal.100' }}>
+                We are building an admin-sided volunteer management platform for the admins of ELDR Law and Disability and Rights Center.
+                Our platform aims to streamline volunteer coordination, enhance communication, and improve overall efficiency for non-profit organizations.
+              </Highlight>
             </Text>
           </CardBody>
         </Card>

@@ -9,11 +9,11 @@ app.use(express.json());
 app.get("/", (req, res) => res.json({ ok: true }));
 
 // GET /api/team/:teamName
-// I already wrote this for you! You can modify it if you want to change the data structure.
 app.get("/api/team/:teamName", async (req, res) => {
   const { teamName } = req.params;
 
   try {
+    // 1) Get the team row
     const teamResult = await pool.query(
       `SELECT team_id, team_name, description
        FROM "Members".teams
@@ -27,8 +27,10 @@ app.get("/api/team/:teamName", async (req, res) => {
 
     const team = teamResult.rows[0];
 
+    // 2) Get people + roles for that team
     const peopleResult = await pool.query(
       `SELECT
+          m.member_id,
           r.role_name,
           m.first_name,
           m.last_name,
@@ -43,15 +45,18 @@ app.get("/api/team/:teamName", async (req, res) => {
       [team.team_id]
     );
 
+    // 3) Group by role_name
     const grouped = {};
     for (const row of peopleResult.rows) {
       if (!grouped[row.role_name]) grouped[row.role_name] = [];
       grouped[row.role_name].push({
+        member_id: row.member_id, 
         first_name: row.first_name,
         last_name: row.last_name,
         pronouns: row.pronouns,
         email: row.email,
-        year_of_study: row.year_of_study
+        year_of_study: row.year_of_study,
+        role_name: row.role_name
       });
     }
 

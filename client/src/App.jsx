@@ -1,71 +1,136 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  Box,
   Container,
+  VStack,
   Heading,
   Text,
   Button,
-  VStack,
   SimpleGrid,
+  Divider,
   Card,
   CardHeader,
   CardBody,
   List,
-  ListItem,
-  Divider
+  ListItem
 } from "@chakra-ui/react";
+
 import api from "./api";
 import RoleSection from "./components/RoleSection";
 
 export default function App() {
-  const [data, setData] = useState(null);
+  const [team, setTeam] = useState(null);
+  const [roles, setRoles] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadTeam() {
+    async function fetchTeam() {
       try {
-        // TODO: Change team name to YOUR team in Neon
-        const res = await api.get("/team/your-team-name");
-        setData(res.data);
+        // IMPORTANT: change this to your real team name in Neon
+        const res = await api.get("/team/awesome-team");
+        setTeam(res.data.team);
+        setRoles(res.data.roles || {});
       } catch (err) {
         console.error("Error fetching team:", err);
+      } finally {
+        setLoading(false);
       }
     }
-    loadTeam();
+
+    fetchTeam();
   }, []);
 
-  if (!data) {
+  if (loading) {
     return (
-      <Container py={20}>
+      <Container py={20} maxW="4xl" centerContent>
         <Heading size="md">Loading team data...</Heading>
-        <Text mt={2}>Make sure your server is running and your query is correct.</Text>
+        <Text color="gray.500">Make sure your server is running.</Text>
       </Container>
     );
   }
 
-  const { team, roles } = data;
+  if (!team) {
+    return (
+      <Container py={20} maxW="4xl" centerContent>
+        <Heading size="md">Team not found</Heading>
+        <Text color="gray.500">
+          Check the team name in App.jsx and Neon.
+        </Text>
+      </Container>
+    );
+  }
 
-  //Work inside of here, make it the way you want!
+  // roles = { Developer: [...], Designer: [...], ... }
+  const roleSections = Object.entries(roles).map(([title, members]) => ({
+    title,
+    members
+  }));
+
   return (
     <Container py={10} maxW="7xl">
-      <VStack spacing={6} align="start" mb={10}>
-        <Heading>{team.name}</Heading>
-        <Text fontSize="lg">{team.description}</Text>
-        <Button
-          as="a"
-          href={team.link}
-          colorScheme="teal"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View Team Page
-        </Button>
+      {/* ===== TEAM HEADER ===== */}
+      <VStack spacing={4} align="start" mb={10}>
+        <Heading size="2xl">{team.team_name}</Heading>
+        <Text fontSize="lg" color="gray.600">
+          {team.description}
+        </Text>
       </VStack>
 
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
-        {roles.map((role) => (
-          <RoleSection key={role.name} role={role} />
-        ))}
+      {/* ===== ABOUT US SECTION ===== */}
+      <Card mb={8}>
+        <CardHeader>
+          <Heading size="lg">About Us</Heading>
+        </CardHeader>
+        <CardBody>
+          <Text>
+            {/* TODO: Students replace */}
+            We are a team of builders and designers working together to create a
+            meaningful product. Replace this with your team’s mission.
+          </Text>
+        </CardBody>
+      </Card>
+
+      {/* ===== PROJECT + GOALS SECTION ===== */}
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={10}>
+        <Card>
+          <CardHeader>
+            <Heading size="lg">Project Overview</Heading>
+          </CardHeader>
+          <CardBody>
+            <Text>
+              {/* TODO: Students replace */}
+              Write 2–3 sentences describing your project and what problem it
+              solves.
+            </Text>
+          </CardBody>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <Heading size="lg">Goals</Heading>
+          </CardHeader>
+          <CardBody>
+            <List spacing={2}>
+              {/* TODO: Students replace */}
+              <ListItem>Goal 1</ListItem>
+              <ListItem>Goal 2</ListItem>
+              <ListItem>Goal 3</ListItem>
+            </List>
+          </CardBody>
+        </Card>
       </SimpleGrid>
+
+      <Divider my={8} />
+
+      {/* ===== ROLE SECTIONS (LOOP THROUGH ALL DATA) ===== */}
+      <VStack spacing={10} align="stretch">
+        {roleSections.map((section) => (
+          <RoleSection
+            key={section.title}       // unique per role section
+            title={section.title}     // e.g. "Developer"
+            members={section.members} // array of members
+          />
+        ))}
+      </VStack>
     </Container>
   );
 }

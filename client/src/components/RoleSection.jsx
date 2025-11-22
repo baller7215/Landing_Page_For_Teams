@@ -1,5 +1,3 @@
-//You can customize this component to change how each role section looks.
-//Feel free to add more Chakra UI components and styles as needed.
 import React from "react";
 import {
   Heading,
@@ -13,28 +11,49 @@ import {
   Box
 } from "@chakra-ui/react";
 
-//This component receives a title and members as props and displays them in a styled section.
-//Work on this component to customize how each role section looks!
+// Receives title (role name) + members (array)
 export default function RoleSection({ title, members }) {
   return (
     <Box w="100%">
       <Heading size="lg" mb={4}>
         {title}
       </Heading>
+
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
         {members.map((member) => (
-          <Card key={member.id} borderWidth="1px" borderRadius="lg" overflow="hidden">
+            <Card
+              key={member.email}
+              borderWidth="1px"
+              borderRadius="lg"
+              overflow="hidden"
+              h="100%"
+            >
             <CardHeader>
-              <VStack align="start" spacing={2}>
-                <Heading size="md">{member.name}</Heading>
-                <Badge colorScheme="teal">{member.role}</Badge>
+              <VStack align="start" spacing={1}>
+                <Heading size="md">
+                  {member.first_name} {member.last_name}
+                </Heading>
+                <Badge colorScheme="teal">{title}</Badge>
               </VStack>
             </CardHeader>
+
             <CardBody>
-              <Text>{member.bio}</Text>
+              {member.pronouns && (
+                <Text color="gray.600">Pronouns: {member.pronouns}</Text>
+              )}
+              {member.year_of_study && (
+                <Text color="gray.600">Year: {member.year_of_study}</Text>
+              )}
+              <Text mt={2} fontSize="sm" color="blue.600">
+                {member.email}
+              </Text>
             </CardBody>
           </Card>
         ))}
+
+        {members.length === 0 && (
+          <Text color="gray.500">No members listed yet.</Text>
+        )}
       </SimpleGrid>
     </Box>
   );

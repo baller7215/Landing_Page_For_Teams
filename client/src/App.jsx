@@ -26,7 +26,7 @@ export default function App() {
     async function fetchTeam() {
       try {
         // IMPORTANT: change this to your real team name in Neon
-        const res = await api.get("/team/awesome-team");
+        const res = await api.get("/team/ELDR");
         setTeam(res.data.team);
         setRoles(res.data.roles || {});
       } catch (err) {

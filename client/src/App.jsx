@@ -270,7 +270,7 @@ export default function App() {
               transition="all 0.3s ease"
             >
               <CardHeader mb="-4">
-                <Heading lineHeight="short" color="white">
+                <Heading size="lg" lineHeight="short" color="white">
                   <Highlight query='Project Overview' styles={{ px: '4', py: '2', rounded: 'full', bg: 'whiteAlpha.300', color: 'white' }}>
                     Project Overview
                   </Highlight>

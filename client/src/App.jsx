@@ -298,7 +298,11 @@ export default function App() {
               transition="all 0.3s ease"
             >
               <CardHeader>
-                <Heading size="lg" color="white">Goals</Heading>
+                <Heading size="lg" color="white">
+                  <Highlight query='Goals' styles={{ px: '4', py: '2', rounded: 'full', bg: 'whiteAlpha.300', color: 'white' }}>
+                    Goals
+                  </Highlight>
+                </Heading>
               </CardHeader>
               <Progress size='xs' isIndeterminate colorScheme="teal" />
               <CardBody color="white">

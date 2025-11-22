@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Heading,
   SimpleGrid,
@@ -8,47 +8,89 @@ import {
   Text,
   Badge,
   VStack,
-  Box
+  Box,
+  useColorModeValue,
+  Icon,
+  HStack
 } from "@chakra-ui/react";
+import { MdEmail, MdPerson } from 'react-icons/md';
 
 // Receives title (role name) + members (array)
 export default function RoleSection({ title, members }) {
+  const cardBg = useColorModeValue('white', 'gray.800');
+  const cardBorder = useColorModeValue('gray.200', 'gray.600');
+  const badgeBg = useColorModeValue('teal', 'teal');
+  
   return (
     <Box w="100%">
-      <Heading size="lg" mb={4}>
+      <Heading 
+        size="lg" 
+        mb={4}
+        bgGradient="linear(to-r, teal.400, blue.500)"
+        bgClip="text"
+      >
         {title}
       </Heading>
 
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
         {members.map((member) => (
             <Card
               key={member.email}
-              borderWidth="1px"
-              borderRadius="lg"
+              bg={cardBg}
+              borderWidth="2px"
+              borderColor={cardBorder}
+              borderRadius="xl"
               overflow="hidden"
               h="100%"
-              _hover={{ transform: "scale(1.03)", bg: "gray.50" }}
-              transition="transform 0.3s ease, background-color 0.3s ease"
+              shadow="md"
+              _hover={{ 
+                transform: "translateY(-8px) scale(1.02)",
+                shadow: "2xl",
+                borderColor: "teal.400"
+              }}
+              transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+              cursor="pointer"
             >
-            <CardHeader>
-              <VStack align="start" spacing={1}>
-                <Heading size="md">
-                  {member.first_name} {member.last_name}
-                </Heading>
-                <Badge colorScheme="teal">{title}</Badge>
+            <CardHeader bg={useColorModeValue('teal.50', 'teal.900')} pb={4}>
+              <VStack align="start" spacing={2}>
+                <HStack>
+                  <Icon as={MdPerson} boxSize={5} color="teal.500" />
+                  <Heading size="md" color={useColorModeValue('gray.800', 'white')}>
+                    {member.first_name} {member.last_name}
+                  </Heading>
+                </HStack>
+                <Badge 
+                  colorScheme={badgeBg} 
+                  fontSize="sm" 
+                  px={3} 
+                  py={1} 
+                  borderRadius="full"
+                  textTransform="capitalize"
+                >
+                  {title}
+                </Badge>
               </VStack>
             </CardHeader>
 
             <CardBody>
-              {member.pronouns && (
-                <Text color="gray.600">Pronouns: {member.pronouns}</Text>
-              )}
-              {member.year_of_study && (
-                <Text color="gray.600">Year: {member.year_of_study}</Text>
-              )}
-              <Text mt={2} fontSize="sm" color="blue.600">
-                {member.email}
-              </Text>
+              <VStack align="start" spacing={2}>
+                {member.pronouns && (
+                  <Text color={useColorModeValue('gray.600', 'gray.400')} fontSize="sm">
+                    <strong>Pronouns:</strong> {member.pronouns}
+                  </Text>
+                )}
+                {member.year_of_study && (
+                  <Text color={useColorModeValue('gray.600', 'gray.400')} fontSize="sm">
+                    <strong>Year:</strong> {member.year_of_study}
+                  </Text>
+                )}
+                <HStack mt={2} spacing={2}>
+                  <Icon as={MdEmail} color="blue.500" />
+                  <Text fontSize="sm" color="blue.500" fontWeight="medium">
+                    {member.email}
+                  </Text>
+                </HStack>
+              </VStack>
             </CardBody>
           </Card>
         ))}

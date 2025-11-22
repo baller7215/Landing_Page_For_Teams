@@ -159,6 +159,8 @@ export default function App() {
             <Heading 
               size="2xl"
               fontWeight="extrabold"
+              bgGradient="linear(to-r, teal.400, blue.500)"
+              bgClip="text"
             >
               {team.team_name}
             </Heading>

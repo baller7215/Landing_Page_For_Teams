@@ -27,6 +27,8 @@ export default function RoleSection({ title, members }) {
               borderRadius="lg"
               overflow="hidden"
               h="100%"
+              _hover={{ transform: "scale(1.03)" }}
+              transition="transform 0.3s ease"
             >
             <CardHeader>
               <VStack align="start" spacing={1}>

@@ -34,7 +34,7 @@ export default function App() {
   
   const bgGradient = useColorModeValue(
     'linear(to-br, blue.50, purple.50, pink.50)',
-    'linear(to-br, gray.900, purple.900, blue.900)'
+    'linear(to-br, gray.900, blue.900)'
   );
   const cardBg = useColorModeValue('white', 'gray.800');
 
@@ -176,7 +176,7 @@ export default function App() {
               <Image 
                 src='src/eldr.png' 
                 alt='ELDR Logo'
-                objectFit="cover"
+                objectFit="contain"
                 w="100%"
                 h="100%"
               />

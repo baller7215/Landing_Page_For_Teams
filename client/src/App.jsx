@@ -57,9 +57,7 @@ export default function App() {
     return (
       <Container py={20} maxW="4xl" centerContent>
         <Heading size="md">Team not found</Heading>
-        <Text color="gray.500">
-          Check the team name in App.jsx and Neon.
-        </Text>
+        <Text color="gray.500">Check the team name in App.jsx and Neon.</Text>
       </Container>
     );
   }
@@ -67,7 +65,7 @@ export default function App() {
   // roles = { Developer: [...], Designer: [...], ... }
   const roleSections = Object.entries(roles).map(([title, members]) => ({
     title,
-    members
+    members,
   }));
 
   return (
@@ -81,15 +79,24 @@ export default function App() {
       </VStack>
 
       {/* ===== ABOUT US SECTION ===== */}
-      <Card mb={8}>
+      {/* add a transition on size */}
+      <Card
+        mb={8}
+        bgGradient="linear(to-r, #B2F5EA, green.100)"
+        _hover={{ transform: "scale(1.01) rotate(-.5deg)" }}
+        transition="transform 0.3s ease"
+      >
         <CardHeader>
           <Heading size="lg">About Us</Heading>
         </CardHeader>
         <CardBody>
-          <Text>
-            {/* TODO: Students replace */}
-            We are a team of builders and designers working together to create a
-            meaningful product. Replace this with your team’s mission.
+          <Text bg="teal" bgClip="text" fontWeight="bold">
+            We are creating a volunteer management portal for the admins of ELDR
+            (Elder Law and Disability Rights Center) so they can more
+            efficiently track, update, and maintain volunteer involvement with
+            events. ELDR hosts workshops, cases, and clinics, and
+            managing/assigning those volunteers was previously done through
+            Google Forms (which can get messy).
           </Text>
         </CardBody>
       </Card>
@@ -141,8 +148,8 @@ export default function App() {
       <VStack spacing={10} align="stretch">
         {roleSections.map((section) => (
           <RoleSection
-            key={section.title}       // unique per role section
-            title={section.title}     // e.g. "Developer"
+            key={section.title} // unique per role section
+            title={section.title} // e.g. "Developer"
             members={section.members} // array of members
           />
         ))}

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Progress } from '@chakra-ui/react'
+import { MdCheckCircle } from 'react-icons/md'
 import {
   Container,
   VStack,
@@ -11,7 +13,10 @@ import {
   CardHeader,
   CardBody,
   List,
-  ListItem
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList
 } from "@chakra-ui/react";
 
 import api from "./api";
@@ -108,13 +113,24 @@ export default function App() {
           <CardHeader>
             <Heading size="lg">Goals</Heading>
           </CardHeader>
+          <Progress size='xs' isIndeterminate />
           <CardBody>
             <List spacing={2}>
               {/* TODO: Students replace */}
-              <ListItem>Goal 1</ListItem>
-              <ListItem>Goal 2</ListItem>
-              <ListItem>Goal 3</ListItem>
+              <ListItem>
+                <ListIcon as={MdCheckCircle} color='green.500' />
+                The provision of free and low-cost legal services.
+              </ListItem>
+              <ListItem>
+                <ListIcon as={MdCheckCircle} color='green.500' />
+                Ensure low-income seniors and people with disabilities can live with dignity and independance regardless of income.
+              </ListItem>
+              <ListItem>
+                <ListIcon as={MdCheckCircle} color='green.500' />
+                Serve justice for members of our communities who are elderly, living with disabilities, or experiencing homelessness.
+              </ListItem>
             </List>
+            
           </CardBody>
         </Card>
       </SimpleGrid>

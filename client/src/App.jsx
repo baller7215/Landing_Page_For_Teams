@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Progress } from '@chakra-ui/react'
+import { Box, Image, Progress } from '@chakra-ui/react'
 import { MdCheckCircle } from 'react-icons/md'
 import {
   Container,
@@ -77,6 +77,9 @@ export default function App() {
         <Text fontSize="lg" color="gray.600">
           {team.description}
         </Text>
+        <Box boxSize='35px'>
+          <Image src='https://isteam.wsimg.com/ip/f5dc30e0-29ae-4a24-a77e-a22d64016ffc/411e85c6-d05d-4074-a243-74b5a49d63e8.jpg/:/rs=w:178,h:200,cg:true,m/cr=w:178,h:200' alt='ELDR Logo' />
+        </Box>
       </VStack>
 
       {/* ===== ABOUT US SECTION ===== */}
